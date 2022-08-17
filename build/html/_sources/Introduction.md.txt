@@ -1,0 +1,12 @@
+Introduction 
+===================================
+
+A model of a complex biological system is often computed through an integrative method, 
+for instance, [Bayesian metamodeling](https://www.biorxiv.org/content/10.1101/2021.03.29.437574v1.full.pdf), 
+which is a divide-and-conquer modeling approach that aims to integrate heterogeneous input models 
+into a metamodel and update knowledge. While Bayesian metamodeling can in principle be used to 
+couple any set of input models, there are several remaining challenges. Here, we want to 
+overcome some challenges when applying Bayesian metamodeling for more models. 
+Selected solutions for each challenge are packed together as a new framework for 
+practical applications of Bayesian metamodeling. More elaborated descriptions can be 
+found in our **manuscript**. 
