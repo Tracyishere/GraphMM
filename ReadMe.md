@@ -1,3 +1,3 @@
 # GraphMM
 
-visit: https://graphmmgithubio.readthedocs.io/
+visit: https://graphmm.readthedocs.io/
