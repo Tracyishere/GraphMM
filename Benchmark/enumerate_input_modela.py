@@ -2,6 +2,7 @@
 
 from InputModel.Groundtruth import *
 from InputModel.Subsystem import *
+<<<<<<< Updated upstream
 from GraphMetamodel.SurrogateModel_new import *
 from GraphMetamodel.DefineCouplingGraph import *
 import statistics_basic as stat
@@ -31,6 +32,10 @@ import GraphMetamodel.MultiScaleInference_v12 as MSI
 
 # %%
     
+=======
+from GraphMetamodel.SurrogateModel import *
+import statistics_basic as stat
+>>>>>>> Stashed changes
 import glob
 import numpy as np
 from scipy.stats import *
@@ -89,7 +94,11 @@ from InputModel.Subsystem import *
 
 surrogate_a_files = glob.glob('*.csv')
 
+<<<<<<< Updated upstream
 filepath = '/Users/tracy/PhD/Projects/Ongoing/2GraphMM/Benchmark/results/enumerate_surrogate_model_v8/'
+=======
+filepath = './results/enumerate_surrogate_model/'
+>>>>>>> Stashed changes
 files_sorted = []
 enumerate_mean = sorted(np.unique(np.array([item.split('/')[-1].split('_')[-2] for item in glob.glob(filepath+'*.csv')])),key=float)
 enumerate_cov = sorted(np.unique(np.array([item.split('/')[-1].split('_')[-1][:-4] for item in glob.glob(filepath+'*.csv*')])),key=float)

@@ -49,6 +49,18 @@ To run the metamodel enumeration:
 3. Results will be saved in the `results/enumerate_metamodel_v2/` directory
 4. Visualizations can be generated using the plotting functions in the script
 
+<<<<<<< Updated upstream
 ## Note
 
 This README provides an overview of the project structure and main script functionality. For detailed information on specific functions and classes, please refer to the individual module docstrings and comments within the code.
+=======
+## Copyright
+
+
+© 2023 GraphMM Project Contributors (chenxi.wang@salilab.org). All rights reserved.
+
+This project and its contents are protected under applicable copyright laws. Unauthorized reproduction, distribution, or use of this material without express written permission from the GraphMM Project Contributors is strictly prohibited.
+
+For inquiries regarding usage, licensing, or collaboration, please contact the project maintainers.
+
+>>>>>>> Stashed changes

@@ -3,9 +3,15 @@
 from InputModel.Groundtruth import *
 from InputModel.Subsystem import *
 from GraphMetamodel.SurrogateModel import *
+<<<<<<< Updated upstream
 from GraphMetamodel.DefineCouplingGraph_new import *
 import statistics_basic as stat
 import GraphMetamodel.MultiScaleInference_new as MSI
+=======
+from GraphMetamodel.DefineCouplingGraph import *
+import statistics_basic as stat
+import GraphMetamodel.MultiScaleInference as MSI
+>>>>>>> Stashed changes
 from InputModel.Subsystem import *
 from InputModel.Groundtruth import *
 from matplotlib.pyplot import MultipleLocator
@@ -37,7 +43,11 @@ for omg1 in range(0, 11, 1):
 
         metamodel = MSI.MetaModel(Coupling_graph) 
         metamodel.inference(test_omega=[omg1*0.1, omg2*0.1], 
+<<<<<<< Updated upstream
                             filepath=f'./results/enumerate_metamodel_v2/metamodel_joint_{omg1*0.1:.2f}_{omg2*0.1:.2f}.csv')
+=======
+                            filepath=f'./results/enumerate_metamodel/metamodel_joint_{omg1*0.1:.2f}_{omg2*0.1:.2f}.csv')
+>>>>>>> Stashed changes
 
 
 
@@ -45,7 +55,11 @@ for omg1 in range(0, 11, 1):
 
 import glob
 
+<<<<<<< Updated upstream
 filepath = '/Users/tracy/PhD/Projects/Ongoing/1GraphMM/Benchmark/results/enumerate_metamodel_v3/'
+=======
+filepath = './results/enumerate_metamodel/'
+>>>>>>> Stashed changes
 files_sorted = []
 enumerate_mean = sorted(np.unique(np.array([item.split('/')[-1].split('_')[-2] for item in glob.glob(filepath+'*.csv')])),key=float)
 enumerate_cov = sorted(np.unique(np.array([item.split('/')[-1].split('_')[-1][:-4] for item in glob.glob(filepath+'*.csv*')])),key=float)

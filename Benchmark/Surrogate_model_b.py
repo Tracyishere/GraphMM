@@ -3,7 +3,11 @@
 from GraphMetamodel.utils import *
 import numpy as np
 from InputModel.Subsystem import *
+<<<<<<< Updated upstream
 from GraphMetamodel.SurrogateModel_new import *
+=======
+from GraphMetamodel.SurrogateModel import *
+>>>>>>> Stashed changes
 import random
 
 np.random.seed(12)
@@ -49,6 +53,7 @@ surrogate_b = SurrogateInputModel(name='model_b',
 surrogate_b.inference(n_repeat=1, filepath='./results/surrogate_model_b.csv')
 # plot_surrogatemodel(surrogate_b, inputmodel=input_b, inputmodelerror=input_b_std)
 
+<<<<<<< Updated upstream
 # # %%
 
 # a = np.genfromtxt('./results/surrogate_model_b_new1.csv', delimiter=',', skip_header=1)
@@ -59,5 +64,7 @@ surrogate_b.inference(n_repeat=1, filepath='./results/surrogate_model_b.csv')
 #     plt.plot(b[:, i*2])
 #     plt.fill_between(np.arange(0, len(b[:, i*2]), 1), b[:, i*2]-b[:, i*2+1], b[:, i*2]+b[:, i*2+1], alpha=0.1)
 #     plt.show()
+=======
+>>>>>>> Stashed changes
 
 # %%
