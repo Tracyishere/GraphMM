@@ -5,7 +5,7 @@ This project implements a graph-based metamodeling approach for multi-scale biol
 ## Project Structure
 
 - `InputModel/`: Contains groundtruth and subsystem models
-- `GraphMetamodel/`: Includes the surrogate model and coupling graph definitions
+- `GraphMetamodel/`: Includes the surrogate model and coupling graph src definitions
 - `results/`: Stores output files from model simulations
 
 ## Key Components
@@ -49,15 +49,11 @@ To run the metamodel enumeration:
 3. Results will be saved in the `results/enumerate_metamodel_v2/` directory
 4. Visualizations can be generated using the plotting functions in the script
 
-<<<<<<< Updated upstream
-## Note
-
-This README provides an overview of the project structure and main script functionality. For detailed information on specific functions and classes, please refer to the individual module docstrings and comments within the code.
 =======
 ## Copyright
 
 
-© 2023 GraphMM Project Contributors (chenxi.wang@salilab.org). All rights reserved.
+© 2023 GraphMM Project Contributors (contact: <a href="mailto:chenxi.wang@salilab.org">chenxi.wang@salilab.org</a>). All rights reserved.
 
 This project and its contents are protected under applicable copyright laws. Unauthorized reproduction, distribution, or use of this material without express written permission from the GraphMM Project Contributors is strictly prohibited.
 
