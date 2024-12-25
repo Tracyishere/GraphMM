@@ -8,7 +8,7 @@ We introduce Graph-based Metamodeling (GraphMM), a novel framework that integrat
 For detailed documentation, please visit: https://graphmm.readthedocs.io/
 
 <p align="center">
-  <img src="./GraphMM.png" width="600"/>
+  <img src="./GraphMM.png" width="800"/>
 </p>
 
 
