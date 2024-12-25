@@ -12,7 +12,7 @@ For detailed documentation, please visit: https://graphmm.readthedocs.io/
 </p>
 
 
-# Project Structure
+# Repo Structure
 
 The project contains a benchmark and a multi-scale insulin secretion metamodel (MuSIS), both using the GraphMM modeling framework. The project structure is as follows:
 1. `Benchmark/`: Contains the benchmark toy system for GraphMM using a toy GSIS model.  **Quick start**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salilab/GraphMM/blob/main/Benchmark/tutorial.ipynb)
@@ -29,15 +29,18 @@ The project contains a benchmark and a multi-scale insulin secretion metamodel (
 
 
 
-
-
 # Usage
 
-First, install the dependencies:
+### Prerequisite
 
 ```bash
-pip install filterpy
-pip install scipy
+python           3.7
+scikit-learn     1.0.2
+pandas           1.3.5
+numpy            1.21.6
+scipy            1.7.3
+filterpy         1.4.5
+daft             2.10.0
 ```
 
 ### Benchmark - Toy GSIS metamodel
