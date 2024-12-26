@@ -16,7 +16,7 @@ For detailed documentation, please visit: https://graphmm.readthedocs.io/
 
 The project contains a benchmark and a multi-scale insulin secretion metamodel (MuSIS), both using the GraphMM modeling framework. The project structure is as follows:
 1. `Benchmark/`: Contains the benchmark toy system for GraphMM using a toy GSIS model.  
-**Quick start**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1K5eKwQ1fXwWwJiVSIqbV4sTWd_qw-4GL/)
+**Quick start**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1K5eKwQ1fXwWwJiVSIqbV4sTWd_qw-4GL)
    
 
 2. `GraphMM_MuSIS/`: The main package for GraphMM
