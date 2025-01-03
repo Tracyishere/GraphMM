@@ -42,24 +42,11 @@ class MetaModel:
             # model_b = self.coupling_graph.models[key][1]
             ma.connect_var_idx += [self.coupling_graph.connect_idx[pair_c][0]]
             ma.connect_omega += [item[0] for item in self.coupling_graph.omega[pair_c]]
-            # ##################################
-            # 
-            #  TBD: how to store omega here? 
-            #  can be either read from the file or store in the memory
-            # 
-            # ##################################
             ma.connect_unit_weight += [self.coupling_graph.unit_weight[pair_c][0]]
             mb.connect_var_idx += [self.coupling_graph.connect_idx[pair_c][1]]
             mb.connect_omega += [item[1] for item in self.coupling_graph.omega[pair_c]]
             mb.connect_unit_weight += [self.coupling_graph.unit_weight[pair_c][1]]
 
-        # ##################################
-        # 
-        # TBD: consider if the min_dt is not the factor of all dt, 
-        # update the min_dt if the min_dt model ends
-        #
-        #
-        # ##################################
         self.min_dt = min(self.dt_list)
         print('dt_list: ', self.dt_list)
         print('self.min_dt: ', self.min_dt) # 1e-6
@@ -68,11 +55,6 @@ class MetaModel:
         self.upd_coupling_var = []
         self.noise_model_type = 'time-variant'
         
-        # ##################################
-        # 
-        # TBD:  How to remove repeated state variables?
-        #
-        # ##################################
         self.meta_state = self.meta_state[:9] + self.meta_state[21:]
         self.n_meta_state = len(self.meta_state) +2 # +2 if only for VE_IHC_ISK
         
@@ -218,12 +200,6 @@ class MetaModel:
 
             con_phi_ts += [(phi_v1, phi_v2)]
 
-        # #########################
-        # 
-        # TBD: this is temporary for repeated states
-        #
-        #
-        # #########################
         Meta_Q_ts = np.diag(np.array(coupling_var_ts + Meta_Q_ts[:9] + Meta_Q_ts[21:]))
         Meta_R_ts = np.diag(np.array(coupling_var_ts + Meta_R_ts[:9] + Meta_R_ts[21:])) 
 

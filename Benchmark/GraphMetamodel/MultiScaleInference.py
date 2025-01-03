@@ -158,7 +158,6 @@ class MetaModel:
            
         Meta_mean_t0 = np.array(coupling_var_state_mean_t0 + model_var_state_mean_t0)
         # by default, the initial covariance matrix of the metamodel is diagnal, unless additional info is given
-        # TBD: square maybe not correct
         Meta_cov_t0 = np.diag(np.array(coupling_var_state_std_t0 + model_var_state_std_t0))**2
 
         return Meta_mean_t0, Meta_cov_t0

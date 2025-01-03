@@ -29,7 +29,6 @@ def compute_overlap_of_normal_dist(m1,m2,std1,std2):
     c = m1**2 /(2*std1**2) - m2**2 / (2*std2**2) - np.log(std2/std1)
     
     result = np.roots([a,b,c])
-    # TBD: check the intersection of the distribution
     
     x1 = np.linspace(m1-3*std1, m1+3*std1, 10000)
     x2 = np.linspace(m2-3*std2, m2+3*std2, 10000)
@@ -115,7 +114,6 @@ class coupling_graph:
         for models with different time scales, the shape of the coupling graph depends on the step of the models and the ts_scale
         '''
 
-        ################ TBD: deliver the value of n_step using the json? ################
         # count number of overlap steps for the two models
         n_step = len(np.arange(0, max(self.m1.total_time, self.m2.total_time), min(self.m1.dt, self.m2.dt)))
         if self.m1.dt > self.m2.dt:
@@ -135,7 +133,6 @@ class coupling_graph:
 
         coupler_step = len(self.overlap_area)
 
-        ################# TBD: check the output of overlap area valid ################
 
         # this is a herustic function
         self.phi_1 *= np.array([self.m1.Q[i,self.connect_idx[0],self.connect_idx[0]] for i in range(self.m1.n_step)])

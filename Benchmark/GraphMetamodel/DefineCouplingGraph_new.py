@@ -116,7 +116,6 @@ class coupling_graph:
 
 
         if verbose==1:
-            # TBD: generate a graph using pypgm
             print('===== Sub-coupling graph =====')
             print('model_one_name: {}'.format(ma.modelname))
             print('connecting_variable: {}'.format(ma.state[connect_idx[0]]))
@@ -129,14 +128,6 @@ class coupling_graph:
         mb_mean = self.model_states[list(self.model_idx.keys())[1]][:,:,0]
         mb_std = self.model_states[list(self.model_idx.keys())[1]][:,:,1]
 
-        # ########################## 
-        #
-        # TBD:
-        # 1. m1 total time larger than m2 total time
-        # 2. decide the time interval for model coupling if the models doesn't end at the same time
-        #
-        #
-        # ##########################
         if ma.dt > mb.dt:
             print('run this')
 
