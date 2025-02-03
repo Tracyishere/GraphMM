@@ -2,11 +2,8 @@
 
 from GraphMetamodel.utils import *
 from InputModel.Subsystem import *
-<<<<<<< Updated upstream
 from GraphMetamodel.SurrogateModel_new import *
-=======
 from GraphMetamodel.SurrogateModel import *
->>>>>>> Stashed changes
 import numpy as np
 import random
 
@@ -70,19 +67,5 @@ def run_surrogate_model_a(method, mean_scale, std_scale):
     return surrogate_a
 
 surrogate_a = run_surrogate_model_a(method='MultiScale', mean_scale=1, std_scale=0.01)
-
-<<<<<<< Updated upstream
-# # %%
-
-# a = np.genfromtxt('./results/surrogate_model_a_new.csv', delimiter=',', skip_header=1)
-# b = np.genfromtxt('./results/surrogate_model_a.csv', delimiter=',')
-# for i in range(2):
-#     plt.plot(a[:, i*2])
-#     plt.fill_between(np.arange(0, len(a[:, i*2]), 1), a[:, i*2]-a[:, i*2+1], a[:, i*2]+a[:, i*2+1], alpha=0.1)
-#     plt.plot(b[:, i*2])
-#     plt.fill_between(np.arange(0, len(b[:, i*2]), 1), b[:, i*2]-b[:, i*2+1], b[:, i*2]+b[:, i*2+1], alpha=0.1)
-#     plt.show()
-=======
->>>>>>> Stashed changes
 
 # %%
