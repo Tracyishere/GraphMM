@@ -121,11 +121,14 @@ def plot_metamodel(meta,model_type,filename=None,plot_coupler=False,plot_error=F
         
         sim_time = np.arange(0, m1.total_time, m1.dt)
 
-        plt.plot(sim_time, m1.mean[:,v1_idx], label = 'surrogate_M1', color='darkgreen')
+        m1_mean = np.genfromtxt('./results/surrogate_model_a.csv', delimiter=',', skip_header=1).reshape(-1,2,2)[:,0,0]
+        m1_std = np.genfromtxt('./results/surrogate_model_a.csv', delimiter=',', skip_header=1).reshape(-1,2,2)[:,0,1]
+
+        plt.plot(sim_time, m1_mean, label = 'surrogate_M1', color='darkgreen')
         if plot_error:
             plt.fill_between(sim_time, 
-                            m1.mean[:,v1_idx]-m1.std[:,v1_idx],
-                            m1.mean[:,v1_idx]+m1.std[:,v1_idx],
+                            m1_mean-m1_std,
+                            m1_mean+m1_std,
                             color='darkgreen', alpha = 0.3)
         
         sim_time = np.arange(0, m2.total_time, m2.dt)
@@ -157,11 +160,14 @@ def plot_metamodel(meta,model_type,filename=None,plot_coupler=False,plot_error=F
 
         
         sim_time = np.arange(0, m2.total_time, m2.dt)
-        plt.plot(sim_time, m2.mean[:,v2_idx], label = 'surrogate_M2', color='darkred')
+        m2_mean = np.genfromtxt('./results/surrogate_model_b.csv', delimiter=',', skip_header=1).reshape(-1,3,2)[:,0,0]
+        m2_std = np.genfromtxt('./results/surrogate_model_b.csv', delimiter=',', skip_header=1).reshape(-1,3,2)[:,0,1]
+        
+        plt.plot(sim_time, m2_mean, label = 'surrogate_M2', color='darkred')
         if plot_error:
             plt.fill_between(sim_time, 
-                            m2.mean[:,v2_idx]-m2.std[:,v2_idx], 
-                            m2.mean[:,v2_idx]+m2.std[:,v2_idx],
+                            m2_mean-m2_std, 
+                            m2_mean+m2_std,
                             color='darkred', alpha = 0.3)
         
         

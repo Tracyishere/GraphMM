@@ -2,12 +2,11 @@
 
 from GraphMetamodel.utils import *
 from InputModel.Subsystem import *
-from GraphMetamodel.SurrogateModel_new import *
 from GraphMetamodel.SurrogateModel import *
 import numpy as np
 import random
 
-np.random.seed(12)
+np.random.seed(42)
 # define the forward function
 def fx_model_a(x, dt):
     
@@ -27,7 +26,7 @@ def fx_model_a(x, dt):
 
 
 
-def run_surrogate_model_a(method, mean_scale, std_scale):
+def run_surrogate_model_a(method, mean_scale, transition_cov_scale, emission_cov_scale, save_path=None):
 
     ''' Run the input model at different timescales gets similar results, but it's different when run surrogate models. '''
 
@@ -35,37 +34,30 @@ def run_surrogate_model_a(method, mean_scale, std_scale):
     if method == 'MultiScale':
         # run at the timescale of each input model
 
-        measure_std_scale = 0.01
-        observations_a = get_observations([D_0, I_0], fx_model_a, dt_a, sim_time_a, measure_std_scale)
+        observations_a = get_observations([D_0, I_0], fx_model_a, dt_a, sim_time_a, 0.001)
         observations_a[:,:,0] *= mean_scale
-        # observations_a = random.gauss(input_a_for_surrogate,input_a_for_surrogate*0.1)
-
-        # time-variant noise
-        # Q_a = [np.diag(abs(input_a[i]*random.gauss(0.1,std_scale))) for i in range(n_step_a)]
-        # R_a = [np.diag(abs(observations_a[i,:,0]*random.gauss(1,std_scale))) for i in range(n_step_a)]
-        # time-invariant noise
-        # Q_a = [np.diag(np.mean(input_a, axis=0)*0.1) for i in range(n_step_a)]
-        # R_a = [np.diag(np.mean(input_a, axis=0)*1) for i in range(n_step_a)]
-
-        initial_noise_scale = 0.01
-        transition_cov_scale = std_scale
-        # emission_cov_scale = std_scale
-        emission_cov_scale = 0.1
 
         surrogate_a = SurrogateInputModel(name='model_a',
                                         state=model_var_a, 
-                                        initial=np.array([D_0, I_0]), initial_noise_scale=initial_noise_scale, 
+                                        initial=np.array([D_0, I_0]),
+                                        initial_noise_scale=0.01,
+                                        measure_std_scale=0.01,
                                         fx=fx_model_a, dt=dt_a, input_dt=dt_a, total_time=sim_time_a, 
-                                        measure_std_scale=measure_std_scale, transition_cov_scale=transition_cov_scale,
+                                        transition_cov_scale=transition_cov_scale,
                                         emission_cov_scale=emission_cov_scale, noise_model_type='time-variant',
                                         unit='min')
         
 
-        surrogate_a.inference(n_repeat=1, filepath=f'./results/surrogate_model_a.csv')
+        surrogate_a.inference(n_repeat=1, filepath=save_path)
         # plot_surrogatemodel(surrogate_a, inputmodel=input_a, inputmodelerror=input_a_std)
 
     return surrogate_a
 
-surrogate_a = run_surrogate_model_a(method='MultiScale', mean_scale=1, std_scale=0.01)
+# %%
+
+if __name__ == "__main__":
+    surrogate_a = run_surrogate_model_a(method='MultiScale', mean_scale=1,
+                                        transition_cov_scale=0.01, emission_cov_scale=10, 
+                                        save_path='./results/surrogate_model_a.csv')
 
 # %%

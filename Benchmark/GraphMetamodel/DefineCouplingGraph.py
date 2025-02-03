@@ -116,6 +116,7 @@ class coupling_graph:
 
 
         if verbose==1:
+            # TBD: generate a graph using pypgm/daft here
             print('===== Sub-coupling graph =====')
             print('model_one_name: {}'.format(ma.modelname))
             print('connecting_variable: {}'.format(ma.state[connect_idx[0]]))
