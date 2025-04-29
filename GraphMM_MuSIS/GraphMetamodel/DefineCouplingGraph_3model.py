@@ -241,6 +241,9 @@ class coupling_graph:
         interp_overlap_steps = len(mb_mean)
         coupling_graph_ma_interp = np.ones((len(mb_mean),ma.n_state)) # this is for non-multipling steps?
 
+        print(ma.n_state)
+        print(coupling_graph_ma_interp.shape)
+        print(ma_mean.shape)
         # here, the missing states of the observations is interpolated using the values of state variables instead of the observations
         for i in range(ma.n_state):
             coupling_graph_ma_interp[:,i] = self._interpolate(x=np.linspace(0,ma_batch_time,num=len(ma_mean),endpoint=False),
@@ -389,36 +392,55 @@ class coupling_graph:
             ma_start_line = 1 + int(nb*ma_batchsize) # we know ma_dt is larger
             mb_start_line = 1 + int(nb*self.batchsize)
 
-            if input_file_num == 1:
-                self.batch_model_states[pair_c][ma_idx] = np.genfromtxt(self.model_states_file[pair_c][ma_idx], 
-                                            delimiter=',', 
-                                            skip_header=ma_start_line, 
-                                            max_rows=ma_batchsize).reshape(ma_batchsize, -1, 2)
-            else:
-                temp0 = np.genfromtxt(self.model_states_file[pair_c][ma_idx], 
-                                        delimiter=',', 
-                                        skip_header=ma_start_line, 
-                                        max_rows=ma_batchsize).reshape(ma_batchsize, -1, 2) # (10000, 4, 2)
+            # Always read the first file first to initialize temp0
+            temp0 = np.genfromtxt(self.model_states_file[pair_c][ma_idx], 
+                                    delimiter=',', 
+                                    skip_header=ma_start_line, 
+                                    max_rows=ma_batchsize).reshape(ma_batchsize, -1, 2)
+
+            if input_file_num > 1:
+                # Assuming 4 groups based on the original loop structure for i in range(1, 4)
+                n_groups = 4 
+                if temp0.shape[1] % n_groups != 0:
+                     raise ValueError(f"Initial number of columns ({temp0.shape[1]}) is not divisible by the assumed number of groups ({n_groups}).")
+                n_col_current = temp0.shape[1] // n_groups
+
+                # Iterate through the additional files
                 for nf in range(1, input_file_num):
                     file_path = f"{self.model_states_file[pair_c][ma_idx].rsplit('_', 1)[0]}_{nf}.csv"
                     temp1 = np.genfromtxt(file_path, delimiter=',', 
                                             skip_header=ma_start_line, 
                                             max_rows=ma_batchsize).reshape(ma_batchsize, -1, 2)
-                    # temp0 = np.concatenate((temp0, temp1), axis=1)
-                    n_col = nf
-                    temp2 = np.concatenate((temp0[:,:n_col,:].reshape(ma_batchsize,n_col,-1), temp1[:,0,:].reshape(ma_batchsize,1,-1)), axis=1)
-                    for i in range(1, 4): # IHC only
-                        temp3 = np.concatenate((temp0[:,i*n_col:(i+1)*n_col,:].reshape(ma_batchsize,n_col,-1), 
-                                                temp1[:,i,:].reshape(ma_batchsize,1,-1)), axis=1)
-                        temp2 = np.concatenate((temp2, temp3), axis=1)
-                    temp0 = temp2
                     
+                    if temp1.shape[1] != n_groups:
+                         raise ValueError(f"File {nf} has {temp1.shape[1]} columns, expected {n_groups} columns (groups).")
+
+                    concatenated_groups = []
+                    # Concatenate the first group
+                    group0 = np.concatenate((temp0[:, :n_col_current, :], temp1[:, 0:1, :]), axis=1)
+                    concatenated_groups.append(group0)
+
+                    # Concatenate the remaining groups
+                    for i in range(1, n_groups): 
+                        start_idx = i * n_col_current
+                        end_idx = (i + 1) * n_col_current
+                        group_i = np.concatenate((temp0[:, start_idx:end_idx, :], 
+                                                temp1[:, i:i+1, :]), axis=1)
+                        concatenated_groups.append(group_i)
+                    
+                    # Update temp0 with the horizontally concatenated groups
+                    temp0 = np.concatenate(concatenated_groups, axis=1)
+                    # Increment the number of columns per group
+                    n_col_current += 1
+                    
+            # Assign the final result after processing all files
             self.batch_model_states[pair_c][ma_idx] = temp0
             # print(self.batch_model_states[pair_c][ma_idx].shape)
             self.batch_model_states[pair_c][mb_idx] = np.genfromtxt(self.model_states_file[pair_c][mb_idx], 
                                         delimiter=',', 
                                         skip_header=mb_start_line, 
                                         max_rows=self.batchsize).reshape(self.batchsize, -1, 2)
+            
             
             coupling_variable, interp_connect_var = self._pair_coupling_graph_batch(nb, max(self.n_batch[pair_c]), pair_c, ma, mb,
                                                                         self.unit_weight[pair_c], 

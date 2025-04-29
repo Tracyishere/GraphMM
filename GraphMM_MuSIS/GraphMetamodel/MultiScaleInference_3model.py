@@ -13,6 +13,7 @@ import random
 from filterpy.kalman import UnscentedKalmanFilter as UKF
 from filterpy.kalman import MerweScaledSigmaPoints
 import time
+import numba
 
 class MetaModel:
 
@@ -206,6 +207,7 @@ class MetaModel:
         return Meta_Q_ts, Meta_R_ts, con_phi_ts
 
     
+    @numba.jit(forceobj=True)
     def _fx_metamodel(self, x_ts, dt, ts, coupling_omega_ts, ton_lst, V_list):
 
         xout = x_ts.copy()

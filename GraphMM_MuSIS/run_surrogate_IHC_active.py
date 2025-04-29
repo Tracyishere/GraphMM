@@ -21,9 +21,10 @@ class SurrogateIHC:
 
     def create_model(self, config):
         state_variables = create_state_variables(config)
+        
         self.model = SurrogateInputModel(name='Islet Hub Cell', 
                                          state=state_variables,
-                                         initial=IHC.Init(), 
+                                         initial=fig6Init(),
                                          initial_noise_scale=config['initial_noise_scale'],
                                          fx=IHC._fx_IHC, 
                                          dt=config['dt'], 
