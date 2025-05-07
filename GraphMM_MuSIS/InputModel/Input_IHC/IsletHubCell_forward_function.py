@@ -42,7 +42,7 @@ def _f_input_ode_IHC(x, dt):
 
 def _fx_IHC(x, dt, time):
 
-    SimTime = np.linspace(time*dt, (time+1)*dt, 2)
+    SimTime = np.linspace(time*dt, (time+61)*dt, 61)
     xout = odeint(_f_input_ode_IHC, x, SimTime)
     # xout = odeint(odefunc, x, SimTime)
 
