@@ -2,19 +2,19 @@ import math
 import scipy.io
 import numpy as np
 
-Fig6Para = scipy.io.loadmat('./InputModel/Input_IHC/Fig6Parameters.mat')
+Para = scipy.io.loadmat('./InputModel/Input_IHC/Fig6Parameters.mat')
 hub = 0;
 
 '''STEP 1: Parameter set up '''
 SimTime = 300  # simulation time in seconds
 
-gkatp = Fig6Para['gkatp'].reshape(-1, )
-gca = Fig6Para['gca'].reshape(-1, )
-gk = Fig6Para['gk'].reshape(-1, )
-gs = Fig6Para['gs'].reshape(-1, )
-kca = Fig6Para['kca'].reshape(-1, )
-x0 = Fig6Para['x0'].reshape(-1, )
-M = Fig6Para['M']
+gkatp = Para['gkatp'].reshape(-1, )
+gca = Para['gca'].reshape(-1, )
+gk = Para['gk'].reshape(-1, )
+gs = Para['gs'].reshape(-1, )
+kca = Para['kca'].reshape(-1, )
+x0 = Para['x0'].reshape(-1, )
+M = Para['M']
 N = M.shape[0]
 
 ''' # parameters-2 '''
