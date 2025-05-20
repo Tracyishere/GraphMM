@@ -62,8 +62,8 @@ def ExocytosisModel(x,t):
     GlucFact = 1.2
     
     # The inter-compartment kinetic rates
-    k1=20; km1=100; r1=0.6; rm1=1; r20=0.006; rm2=0.001;
-    r30=1.205; rm3=0.0001; u1=2000; u2=3; u3=0.02;
+    k1=20; km1=100; r1=0.6; rm1=1; r20=2; rm2=0.001;
+    r30=2; rm3=0.0001; u1=2000; u2=3; u3=0.02;
     Kp=2.3; Kp2=2.3
     
     # Vesicles: initial conditions
