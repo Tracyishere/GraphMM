@@ -2,7 +2,7 @@ import math
 import scipy.io
 import numpy as np
 
-Para = scipy.io.loadmat('./InputModel/Input_IHC/Fig6Parameters.mat')
+Para = scipy.io.loadmat('./InputModel/Input_IHC/Fig7Parameters.mat')
 hub = 0;
 
 '''STEP 1: Parameter set up '''
@@ -41,6 +41,6 @@ if hub != 0:
 
 ''' Initial values '''
 
-def fig6Init():
+def fig7Init():
 
     return np.array(x0)
