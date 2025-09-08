@@ -2,11 +2,11 @@ general:
   logging_level: INFO
   logging_format: '%(asctime)s - %(levelname)s - %(message)s'
 
-IHC:
+ICN:
   n_repeat: 1  # Number of times to repeat the simulation
   verbose: 0  # Level of verbosity for logging (0: none, 1: basic, 2: detailed)
-  obs_from_input: './InputModel/Input_IHC/input_IHC_param7_hub27/'  # Path to input observations for IHC model
-  output_filepath: './results/surrogate_IHC_300s_27hub/'  # Directory to save output results
+  obs_from_input: './InputModel/Input_ICN/input_ICN_param7_hub27/'  # Path to input observations for ICN model
+  output_filepath: './results/surrogate_ICN_300s_27hub/'  # Directory to save output results
   total_time: 600  # Total simulation time in seconds
   dt: 3.0e-2  # Time step for simulation
   input_dt: 3.0e-2  # Time step for input data
@@ -31,7 +31,7 @@ ISK:
   emission_cov_scale: 2.0e-1  # Scale of emission covariance
   G: 16.7  # Conductance parameter
   state_variables: ['mem_V.ISK','Ca_md.ISK','Ca_ic.ISK','N1.ISK','N2.ISK','N3.ISK','N4.ISK','N5.ISK','N6.ISK','NF.ISK','NR.ISK','SE.ISK']  # List of state variables for ISK model
-  input_path: './InputModel/Input_IHC/input_IHC_param7_hub42/'  # Path to input data for ISK model
+  input_path: './InputModel/Input_ICN/input_ICN_param7_hub42/'  # Path to input data for ISK model
 
 
 
@@ -47,30 +47,30 @@ VE:
   transition_cov_scale: 1.0e-3  # Scale of transition covariance
   emission_cov_scale: 1.0e-2  # Scale of emission covariance
   G_ex: 16.7  # External conductance parameter
-  sim_state: 'IHC_pm_potential'  # Simulation state variable
+  sim_state: 'ICN_pm_potential'  # Simulation state variable
   state_variables: ['I.VE','V.VE','F.VE','R.VE','D.VE','D_IR.VE','gamma.VE','rho.VE','ISR.VE']  # List of state variables for VE model
-  input_path: './InputModel/Input_IHC/input_IHC_param7_hub27/'  # Path to input data for VE model
+  input_path: './InputModel/Input_ICN/input_ICN_param7_hub27/'  # Path to input data for VE model
 
 
 metamodel:
   input_file_num: 57
-  graph_path: './results/Metamodel_VE_IHC_ISK_300s_42hub/coupling_graph/'
-  result_path: './results/Metamodel_VE_IHC_ISK_300s_42hub/'
+  graph_path: './results/Metamodel_VE_ICN_ISK_300s_42hub/coupling_graph/'
+  result_path: './results/Metamodel_VE_ICN_ISK_300s_42hub/'
   surrogate_state_path:
     VE: './results/surrogate_VE_300s_42hub/'
-    IHC: './results/surrogate_IHC_300s_42hub/'
+    ICN: './results/surrogate_ICN_300s_42hub/'
     ISK: './results/surrogate_ISK_300s_42hub/'
   obs_state_path: './results/'
-  input_path: './InputModel/Input_IHC/input_IHC_param7_hub42/'
+  input_path: './InputModel/Input_ICN/input_ICN_param7_hub42/'
   connect_var:
     VE_ISK: ['F.VE', 'NR.ISK']
-    IHC_ISK: ['Ca.IHC', 'Ca_ic.ISK']
+    ICN_ISK: ['Ca.ICN', 'Ca_ic.ISK']
   unit_weights:
     VE_ISK: [30, 1.2]
-    IHC_ISK: [1, 1]
+    ICN_ISK: [1, 1]
   timescale:
     VE_ISK: [1, 1]
-    IHC_ISK: [1, 60]
+    ICN_ISK: [1, 60]
   ISK:
     total_time: 300
     dt: 1.0e-4

@@ -7,14 +7,14 @@ matplotlib.rcParams['font.family'] = 'sans-serif'
 matplotlib.rcParams['font.sans-serif'] = 'DejaVu Sans' # Or Arial, Helvetica, etc. if available
 
 # --- Configuration ---
-coupling_file = './results/coupling_graph/coupling_graph_param_ISK_IHC_600s_16.csv'
-ihc_surrogate_file = './results/600s/surrogate_IHC_nohub_600s/surrogate_IHC_cell_16.csv'
+coupling_file = './results/coupling_graph/coupling_graph_param_ISK_ICN_600s_16.csv'
+icn_surrogate_file = './results/600s/surrogate_ICN_nohub_600s/surrogate_ICN_cell_16.csv'
 isk_surrogate_file = './results/600s/surrogate_ISK_600s_nohub/surrogate_ISK_600s_cell_16.csv'
 
 
 # Time steps from config.yaml (or deduced from data generation)
 dt_isk = 1.0e-4  # ISK time step
-dt_ihc = 3.0e-2  # IHC time step
+dt_icn = 3.0e-2  # ICN time step
 
 # Column indices (0-based) - assuming header row exists
 # Coupling file: mean=col 0
@@ -23,8 +23,8 @@ coupling_mean_col = 0
 # ISK file: Ca_ic.ISK is state index 2 ('Ca_ic.ISK') -> mean is col 2*2 = 4
 isk_ca_ic_mean_col = 4
 
-# IHC file: Ca.IHC is state index 3 ('Ca.IHC') -> mean is col 3*2 = 6
-ihc_ca_mean_col = 6
+# ICN file: Ca.ICN is state index 3 ('Ca.ICN') -> mean is col 3*2 = 6
+icn_ca_mean_col = 6
 
 # --- Load Data ---
 try:
@@ -42,10 +42,10 @@ try:
     print(f"Read {len(isk_ca_ic)} data points from ISK file (adjusted to match coupling length if needed).")
 
 
-    # Read IHC surrogate data
-    ihc_data = np.genfromtxt(ihc_surrogate_file, delimiter=',', skip_header=1)
-    ihc_ca = ihc_data[:, ihc_ca_mean_col]
-    print(f"Read {len(ihc_ca)} data points from IHC file.")
+    # Read ICN surrogate data
+    icn_data = np.genfromtxt(icn_surrogate_file, delimiter=',', skip_header=1)
+    icn_ca = icn_data[:, icn_ca_mean_col]
+    print(f"Read {len(icn_ca)} data points from ICN file.")
 
 except FileNotFoundError as e:
     print(f"Error: File not found - {e}")
@@ -60,17 +60,17 @@ except Exception as e:
 # --- Create Time Axes ---
 # Coupling and ISK share the same time axis (faster time step)
 time_coupling_isk = np.arange(len(coupling_mean)) * dt_isk
-# IHC time axis
-time_ihc = np.arange(len(ihc_ca)) * dt_ihc
+# ICN time axis
+time_icn = np.arange(len(icn_ca)) * dt_icn
 
 # --- Plotting ---
 fig, ax = plt.subplots(3, 1, figsize=(10, 10), sharex=False) # Adjust figsize if needed
 
-# Plot 1: IHC Surrogate Ca.IHC
-ax[0].plot(time_ihc, ihc_ca, label='Ca.IHC Mean')
-ax[0].set_title('IHC Surrogate Model State (Ca.IHC)')
+# Plot 1: ICN Surrogate Ca.ICN
+ax[0].plot(time_icn, icn_ca, label='Ca.ICN Mean')
+ax[0].set_title('ICN Surrogate Model State (Ca.ICN)')
 ax[0].set_xlabel('Time (s)')
-ax[0].set_ylabel('Ca.IHC Mean')
+ax[0].set_ylabel('Ca.ICN Mean')
 ax[0].grid(True)
 ax[0].legend()
 
@@ -84,7 +84,7 @@ ax[1].legend()
 
 # Plot 3: Coupling Variable Mean Only
 ax[2].plot(time_coupling_isk, coupling_mean, label='Coupling Variable Mean', color='black')
-ax[2].set_title('IHC-ISK Coupling Variable Mean')
+ax[2].set_title('ICN-ISK Coupling Variable Mean')
 ax[2].set_xlabel('Time (s)')
 ax[2].set_ylabel('Coupling Variable Mean')
 ax[2].grid(True)

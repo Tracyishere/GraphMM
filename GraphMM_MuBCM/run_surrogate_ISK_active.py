@@ -83,7 +83,7 @@ def run(cell_number, config):
         output_dir = config['output_filepath']
         os.makedirs(output_dir, exist_ok=True)
         
-        cell_potential = np.genfromtxt(config['input_path']+f'/input_IHC_cell_{cell_number}.csv',
+        cell_potential = np.genfromtxt(config['input_path']+f'/input_ICN_cell_{cell_number}.csv',
                                        delimiter=',',skip_header=1, max_rows=10000).reshape(10000, -1)[:, 0]
         steps = int(float(config['total_time'] // float(config['dt'])))+ 1
         print(type(config['measure_std_scale']))

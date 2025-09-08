@@ -15,7 +15,7 @@ import os
 def fx(x, dt, time, V_mem):
 
     G_ex = 16.7
-    sim_state =  'IHC_pm_potential'
+    sim_state =  'ICN_pm_potential'
 
     I,V,F,R,D,D_IR,gamma,rho,ISR = x
     
@@ -53,14 +53,14 @@ def run(cell_number, config):
         os.makedirs(output_dir, exist_ok=True)
         
         path = config['input_path']
-        V_mem = np.genfromtxt(path+f'/input_IHC_cell_{cell_number}.csv',
+        V_mem = np.genfromtxt(path+f'/input_ICN_cell_{cell_number}.csv',
                             delimiter=',',skip_header=1, max_rows=10000).reshape(10000, -1)[:, 0]
         ton_lst = VE.Vmem2Ksti_time(10000, V_mem)
         
         surrogate_VE = SurrogateVE()
         surrogate_VE.create_model(config)
         surrogate_VE.model.inference(n_repeat=config['n_repeat'], verbose=config['verbose'],
-                                     output_filepath=f"{output_dir}/surrogate_VE_{config['G_ex']}mM_IHC_pm_potential_{config['total_time']}min_cell_{cell_number}.csv",
+                                     output_filepath=f"{output_dir}/surrogate_VE_{config['G_ex']}mM_ICN_pm_potential_{config['total_time']}min_cell_{cell_number}.csv",
                                      V_mem=ton_lst)
         
         logging.info(f"Successfully completed {__name__} for cell {cell_number}")
