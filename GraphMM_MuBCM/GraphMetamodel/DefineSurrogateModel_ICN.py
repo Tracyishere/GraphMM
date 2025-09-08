@@ -41,7 +41,7 @@ class SurrogateInputModel:
         elif os.path.isdir(obs_from_input):
             # Multiple cell files method
             inputfiles = glob.glob(os.path.join(obs_from_input, '*.csv'))
-            sorted_inputfiles = [os.path.join(obs_from_input, f'input_IHC_cell_{i}.csv') for i in range(57)]
+            sorted_inputfiles = [os.path.join(obs_from_input, f'input_ICN_cell_{i}.csv') for i in range(57)]
             obs = []
             for f in sorted_inputfiles:
                 f_obs = np.genfromtxt(f, delimiter=',', skip_header=1)
@@ -173,12 +173,12 @@ class SurrogateInputModel:
             # print(*list(np.repeat(self.state, 2)), file=output, sep=',')
             # print(*list(np.repeat(avg_state_var, 2)), file=output, sep=',')
             for i in range(57):
-                exec("output_{} = open(filepath+'surrogate_IHC_cell_{}.csv', 'w')".format(i,i))
+                exec("output_{} = open(filepath+'surrogate_ICN_cell_{}.csv', 'w')".format(i,i))
                 exec("print(*list(np.repeat(avg_state_var, 2)), file=output_{}, sep=',')".format(i))
 
         # if filepath is not None:
         #     for i in range(57):
-        #         exec("obs_output_{} = open(filepath+'obs_surrogate_IHC_cell_{}.csv', 'w')".format(i,i))
+        #         exec("obs_output_{} = open(filepath+'obs_surrogate_ICN_cell_{}.csv', 'w')".format(i,i))
         #         exec("print(*list(np.repeat(avg_state_var, 2)), file=obs_output_{}, sep=',')".format(i))
 
         if verbose == 1:

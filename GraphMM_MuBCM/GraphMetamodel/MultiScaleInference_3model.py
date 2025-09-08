@@ -137,7 +137,7 @@ class MetaModel:
         mb_obs_ts = self.batch_model_states[pair_c][mb_idx][ts, :, 0]
 
         Meta_obs_mean_ts = np.concatenate([
-            [self.coupling_graph.coupling_variable['IHC_ISK'][batch_time+ts][0]],
+            [self.coupling_graph.coupling_variable['ICN_ISK'][batch_time+ts][0]],
             ma_obs_ts,
             mb_obs_ts
         ])
@@ -251,7 +251,7 @@ class MetaModel:
         xout = np.copy(x_ts)
         
         pair_configs = [
-            ('IHC_ISK', 1, 1e-4),
+            ('ICN_ISK', 1, 1e-4),
             ('VE_ISK', 0, 1e-4)
         ]
         
@@ -283,7 +283,7 @@ class MetaModel:
                 ma_nc_idx = self.meta_state.index(var1) + 2
                 mb_nc_idx = self.meta_state.index(var2) + 2
             
-            if pair_name == 'IHC_ISK':
+            if pair_name == 'ICN_ISK':
                 xout[ma_start_idx:ma_end_idx] = ma.fx(x_ts[ma_start_idx:ma_end_idx], min_dt, ts)
                 factor_a = (1.0 - omega_ts[0]) * units[0]
                 xout[ma_nc_idx] = (factor_a * xout[ma_nc_idx] + omega_ts[0] * xout[num]) / units[0]

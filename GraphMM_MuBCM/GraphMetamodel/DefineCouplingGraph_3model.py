@@ -363,7 +363,7 @@ class coupling_graph:
         self.coupling_variable[pair_c] = np.array(coupling_variable)
 
 
-    def _get_coupling_graph_multi_scale_IHC_ISK(self, filepath, temp_path, num, pair_c, input_file_num, verbose=0):
+    def _get_coupling_graph_multi_scale_ICN_ISK(self, filepath, temp_path, num, pair_c, input_file_num, verbose=0):
 
         f_coupling_param2 = open(filepath,'w')
 
@@ -479,7 +479,7 @@ class coupling_graph:
 
             #     for nc in range(57):
             #         # write the 
-            #         exec("output_{} = open('{}/IHC_cell_{}.csv', 'a')".format(nc,temp_path,nc))
+            #         exec("output_{} = open('{}/ICN_cell_{}.csv', 'a')".format(nc,temp_path,nc))
             #         cell_i = [*interp_connect_var[ts][nc], *interp_connect_var[ts][nc+57], *interp_connect_var[ts][nc+57*2], *interp_connect_var[ts][nc+57*3]]
             #         # print(*cell_i)
             #         exec("print(*cell_i, file=output_{}, sep=',')".format(nc))
@@ -505,8 +505,8 @@ class coupling_graph:
                 self._get_coupling_graph_multi_scale_VE_ISK(graph_output[pair_c], num, pair_c, verbose=verbose)
                 print(self.coupling_variable[pair_c].shape)
 
-            elif pair_c == 'IHC_ISK':
-                self._get_coupling_graph_multi_scale_IHC_ISK(graph_output[pair_c], temp_path, num, pair_c, input_file_num=input_file_num, verbose=verbose)
+            elif pair_c == 'ICN_ISK':
+                self._get_coupling_graph_multi_scale_ICN_ISK(graph_output[pair_c], temp_path, num, pair_c, input_file_num=input_file_num, verbose=verbose)
                 print(self.coupling_variable[pair_c].shape)
 
             else:
