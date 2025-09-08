@@ -14,12 +14,12 @@ For detailed documentation, please visit: https://graphmm.readthedocs.io/
 
 # Repo Structure
 
-The project contains a benchmark and a multi-scale insulin secretion metamodel (MuSIS), both using the GraphMM modeling framework. The project structure is as follows:
+The project contains a benchmark and a multiscale β-cell metamodel (MuBCM), both using the GraphMM modeling framework. The project structure is as follows:
 1. `Benchmark/`: Contains the benchmark toy system for GraphMM using a toy GSIS model.  
 **Quick start**: [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1K5eKwQ1fXwWwJiVSIqbV4sTWd_qw-4GL)
    
 
-2. `GraphMM_MuSIS/`: The main package for GraphMM
+2. `GraphMM_MuBCM/`: The main package for GraphMM
      - `InputModel/`:
         - Contains subsystem models 
     - `GraphMetamodel/`:
@@ -57,17 +57,17 @@ python Surrogate_model_a.py
 python Surrogate_model_b.py
 ```
 
-### Multi-scale insulin secretion metamodel (MuSIS)
-To run the MuSIS metamodel:
+### Multiscale β-cell metamodel (MuBCM)
+To run the MuBCM metamodel:
 1. Ensure all required dependencies are installed
 2. Run `metamodel_inference.py`
 3. Results will be saved in the `results/metamodel_inference/` directory
 4. Visualizations can be generated using the plotting functions in the script
 
 ```bash
-cd GraphMM_MuSIS
+cd GraphMM_MuBCM
 python run_surrogate_ISK_active.py
-python run_surrogate_IHC_active.py
+python run_surrogate_ICN_active.py
 python run_surrogate_VE_active.py
 python run_musis_metamodel_active.py
 ```
