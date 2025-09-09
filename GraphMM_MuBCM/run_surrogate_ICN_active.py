@@ -1,7 +1,7 @@
 from GraphMetamodel.utils import *
 from GraphMetamodel.DefineSurrogateModel_ICN import *
 from InputModel.Input_ICN.IsletHubCell_parameter import *
-import InputModel.Input_ICN.IsletHubCell_forward_function as ICN
+import InputModel.Input_ICN.IsletHubCell_forward_function_sec as ICN
 import os
 import logging
 import yaml
